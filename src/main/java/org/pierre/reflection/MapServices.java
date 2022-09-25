@@ -28,11 +28,18 @@ public class MapServices {
                 }
             }
         }
+        serviceUsages.forEach(serviceUsage -> serviceUsage.setService(getServiceInterface(serviceUsage.getService())));
         System.out.println("serviceUsages = " + serviceUsages);
     }
 
+    // return only classes which implement a Service interface
     private static boolean isService(Field field) {
+
         return Arrays.stream(field.getType().getInterfaces()).filter(aClass -> aClass == Service.class).count() > 0;
+    }
+
+    private static Class getServiceInterface(Class serviceImplementationClass) {
+        return Arrays.stream(serviceImplementationClass.getInterfaces()).filter(anInterface -> Service.class.isAssignableFrom(anInterface)).findFirst().get();
     }
 
 
