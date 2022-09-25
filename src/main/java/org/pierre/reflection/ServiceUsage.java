@@ -12,7 +12,7 @@ public class ServiceUsage {
         this.service = service;
     }
 
-    public List getUsedServices() {
+    public List<Class> getUsedServices() {
         return usedServices;
     }
 
@@ -21,7 +21,7 @@ public class ServiceUsage {
     }
 
     private Class service;
-    private List usedServices = new ArrayList();
+    private List<Class> usedServices = new ArrayList();
     public ServiceUsage(Class service) {
         this.service = service;
     }
