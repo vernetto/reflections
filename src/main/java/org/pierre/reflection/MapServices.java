@@ -13,6 +13,11 @@ import java.util.stream.Collectors;
 
 public class MapServices {
     public static void main(String[] args) throws IOException {
+        List<ServiceUsage> serviceUsages = generateServiceUsageList();
+        renderAsHTML(serviceUsages);
+    }
+
+    private static List<ServiceUsage> generateServiceUsageList() {
         Reflections reflections = new Reflections("org.pierre.reflection.services");
         Set<Class<? extends Service>> services = reflections.getSubTypesOf(Service.class);
         System.out.println("all subtypes (interfaces and implementations) =" + services);
@@ -34,7 +39,7 @@ public class MapServices {
         }
         serviceUsages.forEach(serviceUsage -> serviceUsage.setService(getServiceInterface(serviceUsage.getService())));
         System.out.println("serviceUsages = " + serviceUsages);
-        renderAsHTML(serviceUsages);
+        return serviceUsages;
     }
 
     private static void renderAsHTML(List<ServiceUsage> serviceUsages) throws IOException {
